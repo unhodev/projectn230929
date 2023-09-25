@@ -8,4 +8,22 @@
         <OutputPath>..\Output\bin\$(AssemblyName)</OutputPath>
     </PropertyGroup>
 
+    <ItemGroup>
+        <Compile Include="..\PNShare\**\*.cs" LinkBase="PNShare"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\PNShare\**\*.md" LinkBase="PNShare"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="log4net" Version="2.0.15" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="PNGame.ini">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
