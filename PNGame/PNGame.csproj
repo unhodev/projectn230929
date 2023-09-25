@@ -10,10 +10,12 @@
 
     <ItemGroup>
         <Compile Include="..\PNShare\**\*.cs" LinkBase="PNShare"/>
+        <Compile Include="..\PNUnity\**\*.cs" LinkBase="PNUnity"/>
     </ItemGroup>
 
     <ItemGroup>
         <Content Include="..\PNShare\**\*.md" LinkBase="PNShare"/>
+        <Content Include="..\PNUnity\**\*.md" LinkBase="PNUnity"/>
     </ItemGroup>
 
     <ItemGroup>
