@@ -4,8 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>disable</Nullable>
         <ImplicitUsings>disable</ImplicitUsings>
-        <IntermediateOutputPath>..\..\Output\obj\$(AssemblyName)</IntermediateOutputPath>
-        <OutputPath>..\..\Output\bin\$(AssemblyName)</OutputPath>
+        <IntermediateOutputPath>..\Output\obj\$(AssemblyName)</IntermediateOutputPath>
+        <OutputPath>..\Output\bin\$(AssemblyName)</OutputPath>
     </PropertyGroup>
 
 </Project>
