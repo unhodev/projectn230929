@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 
@@ -25,7 +27,13 @@ public static class GConfig
             .Where(x => !string.IsNullOrEmpty(x.Value) && !string.IsNullOrEmpty(x.Key))
             .ToDictionary(k => k.Key.Replace(':', '.'), v => v.Value);
 
-        _map1 = ResolveKeys(origin);
+        var env = GetPublicStaticFieldsAsDictionary(typeof(Env));
+
+        var merge = origin.Union(env)
+            .GroupBy(x => x.Key)
+            .ToDictionary(k => k.Key, v => v.First().Value);
+
+        _map1 = ResolveKeys(merge);
 
         return;
 
@@ -69,10 +77,50 @@ public static class GConfig
                 var replacement = dictionary[key];
                 value = value.Replace($"{{{key}}}", replacement);
             }
+
             return value;
+        }
+
+        static Dictionary<string, string> GetPublicStaticFieldsAsDictionary(Type type)
+        {
+            var fieldDictionary = new Dictionary<string, string>();
+
+            var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static);
+
+            foreach (var field in fields)
+                fieldDictionary[$"{type.Name}.{field.Name}"] = field.GetValue(null)?.ToString();
+
+            return fieldDictionary;
         }
     }
 
     public static string Get(string key) => _map1.GetValueOrDefault(key);
+    public static int GetInt(string key) => _map1.TryGetValue(key, out var value) ? int.Parse(value) : default;
     public static bool On(string key) => Get(key) == "ON";
+
+    public static DbOptions GetDbOptions(string section)
+    {
+        var options = new DbOptions();
+        options.IsAtlas = On($"{section}.{nameof(options.IsAtlas)}");
+        options.Address = Get($"{section}.{nameof(options.Address)}");
+        options.Username = Get($"{section}.{nameof(options.Username)}");
+        options.Password = Get($"{section}.{nameof(options.Password)}");
+        options.DBName = Get($"{section}.{nameof(options.DBName)}");
+        options.TimeoutMs = GetInt($"{section}.{nameof(options.TimeoutMs)}");
+        options.MaxPoolSize = GetInt($"{section}.{nameof(options.MaxPoolSize)}");
+        options.AutoMigration = On($"{section}.{nameof(options.AutoMigration)}");
+        return options;
+    }
+}
+
+public class DbOptions
+{
+    public bool IsAtlas;
+    public string Address;
+    public string Username;
+    public string Password;
+    public string DBName;
+    public int TimeoutMs;
+    public int MaxPoolSize;
+    public bool AutoMigration;
 }

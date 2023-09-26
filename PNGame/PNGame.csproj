@@ -6,6 +6,7 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <IntermediateOutputPath>..\Output\obj\$(AssemblyName)</IntermediateOutputPath>
         <OutputPath>..\Output\bin\$(AssemblyName)</OutputPath>
+        <NoWarn>1998</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,6 +21,7 @@
 
     <ItemGroup>
       <PackageReference Include="log4net" Version="2.0.15" />
+      <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
     </ItemGroup>
 
     <ItemGroup>

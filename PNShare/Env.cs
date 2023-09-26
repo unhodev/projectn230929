@@ -11,4 +11,7 @@ public static class Env
     public static readonly string BaseDirectory = AppContext.BaseDirectory;
     public static readonly string CurrentDirectory = Environment.CurrentDirectory;
     public static readonly string Ip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString() ?? "127.0.0.1";
+    public static readonly string MachineName = Environment.MachineName;
+
+    public static readonly int MongoSchemaVer = 1;
 }
