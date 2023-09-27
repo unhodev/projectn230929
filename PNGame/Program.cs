@@ -4,6 +4,7 @@ using PNShare.DB;
 using PNShare.Global;
 
 GConfig.Init();
+GTime.Now();
 GLog.Init(GLog.DefaultOptions with { writefile = GConfig.On("GLog.WriteFile"), writeconsole = GConfig.On("GLog.WriteConsole") });
 GameDB.Init(GConfig.GetDbOptions(nameof(GameDB)));
 
