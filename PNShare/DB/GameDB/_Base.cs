@@ -16,6 +16,9 @@ public static partial class GameDB
         _client = client;
         var db = client.GetDatabase(options.DBName);
         _db = db;
+
+        Account.Init(db, nameof(Account));
+        Player.Init(db, nameof(Player));
     }
 
     public static async Task<string> Ping()

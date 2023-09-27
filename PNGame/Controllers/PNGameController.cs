@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 using PNGame.ActionFilters;
+using PNShare.DB;
 using PNUnity.Share;
 
 namespace PNGame.Controllers;
@@ -14,8 +15,17 @@ public class PNGameController : ControllerBase
     {
         return new JsonResult(new
         {
-            code = (int)ec,
+            result = (int)ec,
             debug = $"{ec} {Path.GetFileName(filepath)}:{line}",
+        });
+    }
+
+    protected static IActionResult Error(MongoResult mr, [CallerFilePath] string filepath = "", [CallerLineNumber] int line = 0)
+    {
+        return new JsonResult(new
+        {
+            result = (int)ErrorCode.DB_ERROR,
+            debug = $"{mr} {Path.GetFileName(filepath)}:{line}",
         });
     }
 

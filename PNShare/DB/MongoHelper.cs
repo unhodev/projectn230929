@@ -4,6 +4,16 @@ using PNShare.Global;
 
 namespace PNShare.DB;
 
+public enum MongoResult
+{
+    SUCCESS,
+    ETC,
+    WRONG_AUTH,
+    DUPLICATE_ID,
+    WRONG_SCHEMA,
+    CONNECT_ERROR,
+}
+
 public static class MongoHelper
 {
     public static MongoClient GetClient(DbOptions options)
@@ -19,5 +29,21 @@ public static class MongoHelper
             settings.MaxConnectionPoolSize = options.MaxPoolSize;
 
         return new MongoClient(settings);
+    }
+
+    public static MongoResult AsMr(this Exception exception)
+    {
+        var mr = exception switch
+        {
+            MongoAuthenticationException => MongoResult.WRONG_AUTH,
+            MongoWriteException w => w.WriteError.Category == ServerErrorCategory.DuplicateKey ? MongoResult.DUPLICATE_ID : MongoResult.ETC,
+            TimeoutException => MongoResult.CONNECT_ERROR,
+            FormatException => MongoResult.WRONG_SCHEMA,
+            _ => MongoResult.ETC
+        };
+        if (mr == MongoResult.ETC)
+            GLog.Write(exception);
+
+        return mr;
     }
 }
