@@ -4,5 +4,6 @@
     {
         SUCCESS,
         FAILED,
+        DB_ERROR,
     }
 }
