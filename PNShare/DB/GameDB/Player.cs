@@ -53,5 +53,18 @@ public partial class GameDB
             logintime = logintime,
             tokenexpire = tokenexpire,
         };
+
+        public async Task<(MongoResult mr, MongoGamePlayer1 mp)> Select(string token)
+        {
+            var filter = Builders<MongoGamePlayer1>.Filter.Eq(p => p.token, token);
+            try
+            {
+                return (MongoResult.SUCCESS, await _col.Find(filter).FirstOrDefaultAsync());
+            }
+            catch (Exception e)
+            {
+                return (e.AsMr(), default);
+            }
+        }
     }
 }
