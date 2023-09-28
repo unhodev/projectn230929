@@ -3,19 +3,22 @@
     #region __BASE
     public abstract class ResponseCommon
     {
-        public ErrorCode code { get; set; }
+        public int result; // (int)ErrorCode
     }
-    public class ResError : ResponseCommon
+
+    public class ResponseError : ResponseCommon
     {
-        public string debug { get; set; }
+        public string debug; // 디버깅메시지
     }
-    public class RequestCommon
+
+    public abstract class RequestCommon
     {
-        public string token { get; set; } // 엑세스키
+        public string token; // 토큰
     }
-    public class RequestCommon2 : RequestCommon
+
+    public abstract class RequestWithSync : RequestCommon
     {
-        public string sync { get; set; } // 동기화데이터
+        public string sync; // 동기화데이터
     }
     #endregion
 
@@ -24,11 +27,12 @@
     // 계정 로그인시 호출
     public class ReqAccountLogin
     {
-        public string idtoken { get; set; } // 식별자
+        public string idtoken; // 식별자
     }
+
     public class ResAccountLogin : ResponseCommon
     {
-        public string token { get; set; } // 엑세스키
+        public string token; // 토큰
     }
     #endregion
     #endregion
@@ -39,15 +43,17 @@
     public class ReqPlayerEnter : RequestCommon
     {
     }
+
     public class ResPlayerEnter : ResponseCommon
     {
     }
     #endregion
     #region Player/Sync
     // 동기화 시 호출
-    public class ReqPlayerSync : RequestCommon2
+    public class ReqPlayerSync : RequestWithSync
     {
     }
+
     public class ResPlayerSync : ResponseCommon
     {
     }
