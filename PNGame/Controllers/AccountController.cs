@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using PNShare.Func;
 using PNShare.DB;
 using PNShare.Global;
 using PNUnity.Share;
@@ -58,9 +59,12 @@ public class AccountController : PNGameController
             for (var i = 0; i < MAX_RETRY_CNT; i++)
             {
                 token = Guid.NewGuid().ToString();
+                var now = GTime.Now();
+                var tokenexpire = FuncPlayer.NewTokenExpire(now);
                 mr = await GameDB.Player.Update(playerid, u => u
                     .Set(p => p.token, token)
-                    .Set(p => p.logintime, GTime.Now())
+                    .Set(p => p.tokenexpire, tokenexpire)
+                    .Set(p => p.logintime, now)
                 );
                 if (mr == MongoResult.DUPLICATE_ID)
                     continue;
@@ -82,7 +86,9 @@ public class AccountController : PNGameController
             {
                 var token = Guid.NewGuid().ToString();
                 var nickname = $"User{token[..8]}";
-                mp = GameDB.Player.Create(Random.Shared.NextInt64(), ma.id, GTime.Now(), token, default, nickname, GTime.Now());
+                var now = GTime.Now();
+                var tokenexpire = FuncPlayer.NewTokenExpire(now);
+                mp = GameDB.Player.Create(Random.Shared.NextInt64(), ma.id, now, token, default, nickname, now, tokenexpire);
 
                 mr = await GameDB.Player.Insert(mp);
                 if (mr == MongoResult.DUPLICATE_ID)

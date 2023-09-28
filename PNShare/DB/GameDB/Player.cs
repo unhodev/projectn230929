@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MongoDB.Driver;
 using PNUnity.Share;
 
@@ -39,8 +40,8 @@ public partial class GameDB
             string token,
             int gamech,
             string nickname,
-            DateTime logintime
-        ) => new MongoGamePlayer1()
+            DateTime logintime,
+            DateTime tokenexpire) => new MongoGamePlayer1()
         {
             id = playerid,
             accountid = accountid,
@@ -50,6 +51,7 @@ public partial class GameDB
             nickname = nickname,
             currency = new Dictionary<CurrencyType, long>(),
             logintime = logintime,
+            tokenexpire = tokenexpire,
         };
     }
 }
