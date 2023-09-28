@@ -12,4 +12,10 @@ namespace PNUnity.Share
         public string nickname;                         // 닉네임
         public Dictionary<CurrencyType, long> currency; // 보유재화
     }
+
+    public class SStageDatas
+    {
+        public int randomseed; // 랜덤시드
+        public int killcount;  // 처치횟수
+    }
 }

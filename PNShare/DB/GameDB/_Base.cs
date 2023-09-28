@@ -19,6 +19,7 @@ public static partial class GameDB
 
         Account.Init(db, nameof(Account));
         Player.Init(db, nameof(Player));
+        Stage.Init(db, nameof(Stage));
     }
 
     public static async Task<string> Ping()

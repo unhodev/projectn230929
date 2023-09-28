@@ -31,3 +31,13 @@ public class MongoGamePlayer1 : IMongoDocument<long>
     public Dictionary<CurrencyType, long> currency { get; set; } // 보유재화
     public DateTime logintime { get; set; }                      // 로그인시간
 }
+
+/// <summary>
+/// 스테이지 컨텐츠 관련 데이터
+/// </summary>
+public class MongoGameStage1 : IMongoDocument<long>
+{
+    public long id { get; set; }        // 플레이어ID
+    public int randomseed { get; set; } // 랜덤시드
+    public int killcount { get; set; }  // 처치횟수
+}

@@ -46,6 +46,8 @@
 
     public class ResPlayerEnter : ResponseCommon
     {
+        public SPlayer player;         // 플레이어 정보
+        public SStageDatas stagedatas; // 스테이지 정보
     }
     #endregion
     #region Player/Sync
