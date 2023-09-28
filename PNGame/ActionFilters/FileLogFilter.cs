@@ -38,12 +38,13 @@ public class FileLogFilter : ActionFilterAttribute
         {
             // ignored
         }
+
         return map;
     }
 
     private static string GetResDatas(IActionResult result) => result switch
     {
-        JsonResult jsonResult => JsonSerializer.Serialize(jsonResult.Value),
+        JsonResult { Value: { } value } => GJson.SerializeObject(value),
         ObjectResult { Value: string value } => value,
         _ => "null",
     };

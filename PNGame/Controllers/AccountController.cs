@@ -11,7 +11,7 @@ namespace PNGame.Controllers;
 
 public class AccountController : PNGameController
 {
-    public async Task<IActionResult> Login(string idtoken)
+    public async Task<string> Login(string idtoken)
     {
         if (string.IsNullOrEmpty(idtoken))
             return Error(ErrorCode.FAILED);

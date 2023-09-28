@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 using PNGame.ActionFilters;
 using PNShare.DB;
+using PNShare.Global;
 using PNUnity.Share;
 
 namespace PNGame.Controllers;
@@ -11,26 +12,26 @@ namespace PNGame.Controllers;
 [FileLogFilter]
 public class PNGameController : ControllerBase
 {
-    protected static IActionResult Error(ErrorCode ec, [CallerFilePath] string filepath = "", [CallerLineNumber] int line = 0)
+    protected static string Error(ErrorCode ec, [CallerFilePath] string filepath = "", [CallerLineNumber] int line = 0)
     {
-        return new JsonResult(new
+        return GJson.SerializeObject(new
         {
             result = (int)ec,
             debug = $"{ec} {Path.GetFileName(filepath)}:{line}",
         });
     }
 
-    protected static IActionResult Error(MongoResult mr, [CallerFilePath] string filepath = "", [CallerLineNumber] int line = 0)
+    protected static string Error(MongoResult mr, [CallerFilePath] string filepath = "", [CallerLineNumber] int line = 0)
     {
-        return new JsonResult(new
+        return GJson.SerializeObject(new
         {
             result = (int)ErrorCode.DB_ERROR,
             debug = $"{mr} {Path.GetFileName(filepath)}:{line}",
         });
     }
 
-    protected static IActionResult Success(object response)
+    protected static string Success(object response)
     {
-        return new JsonResult(response);
+        return GJson.SerializeObject(response);
     }
 }
