@@ -18,4 +18,9 @@ namespace PNUnity.Share
         public int randomseed; // 랜덤시드
         public int killcount;  // 처치횟수
     }
+
+    public class SSyncDatas
+    {
+        public int killcount; // 처치횟수
+    }
 }

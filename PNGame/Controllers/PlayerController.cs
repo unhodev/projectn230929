@@ -5,6 +5,7 @@ using PNGame.Modules;
 using PNShare.DB;
 using PNShare.Func;
 using PNUnity.Share;
+using PNUnity.Share.Helper;
 
 namespace PNGame.Controllers;
 
@@ -34,6 +35,24 @@ public class PlayerController : PNGameController
             result = (int)ErrorCode.SUCCESS,
             player,
             stagedatas,
+        });
+    }
+
+    public async Task<string> Sync(string token, string sync)
+    {
+        (var me, var mp) = await GModule.Load_Player_UpdateTokenExpire(token);
+        if (me != ModuleError.SUCCESS)
+            return Error(me);
+
+        var syncdatas = UrlEncodedHelper.Decode(sync);
+        (me, _, var gain) = await GModule.Import_Sync(mp, syncdatas);
+        if (me != ModuleError.SUCCESS)
+            return Error(me);
+
+        return Success(new
+        {
+            result = (int)ErrorCode.SUCCESS,
+            gain,
         });
     }
 }

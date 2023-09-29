@@ -18,7 +18,7 @@
 
     public abstract class RequestWithSync : RequestCommon
     {
-        public string sync; // 동기화데이터
+        public string sync; // 동기화데이터 SSyncDatas.Encode()
     }
     #endregion
 

@@ -6,4 +6,5 @@ public enum CurrencyType
     Ad,
     Cristal,
     Gold,
+    Length,
 }
