@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PNGame", "PNGame\PNGame.csproj", "{C03995FF-6A44-423F-A4C3-999F730D65E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableGenerator", "TableGenerator\TableGenerator.csproj", "{8D43FA1C-173C-4379-A451-02D0EE50C58A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C03995FF-6A44-423F-A4C3-999F730D65E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C03995FF-6A44-423F-A4C3-999F730D65E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C03995FF-6A44-423F-A4C3-999F730D65E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D43FA1C-173C-4379-A451-02D0EE50C58A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D43FA1C-173C-4379-A451-02D0EE50C58A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D43FA1C-173C-4379-A451-02D0EE50C58A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D43FA1C-173C-4379-A451-02D0EE50C58A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

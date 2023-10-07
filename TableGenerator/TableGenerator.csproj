@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>disable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <IntermediateOutputPath>..\Output\obj\$(AssemblyName)</IntermediateOutputPath>
+        <OutputPath>..\Output\bin\$(AssemblyName)</OutputPath>
+        <NoWarn>1998</NoWarn>
+    </PropertyGroup>
+
+</Project>
