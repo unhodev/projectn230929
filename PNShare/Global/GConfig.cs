@@ -111,6 +111,14 @@ public static class GConfig
         options.AutoMigration = On($"{section}.{nameof(options.AutoMigration)}");
         return options;
     }
+
+    public static Dictionary<string, string> GetDict(string key)
+    {
+        var key1 = $"{key}.";
+        return _map1
+            .Where(x => x.Key.StartsWith(key1))
+            .ToDictionary(k => k.Key[key1.Length..], v => v.Value);
+    }
 }
 
 public class DbOptions

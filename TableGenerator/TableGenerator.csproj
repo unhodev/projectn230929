@@ -10,4 +10,24 @@
         <NoWarn>1998</NoWarn>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Include="..\PNShare\Env.cs">
+        <Link>Env.cs</Link>
+      </Compile>
+      <Compile Include="..\PNShare\Global\GConfig.cs">
+        <Link>GConfig.cs</Link>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Google.Apis.Drive.v3" Version="1.62.0.3155" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="TableGenerator.ini">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
