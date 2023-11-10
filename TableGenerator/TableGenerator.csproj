@@ -20,6 +20,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="CsvHelper" Version="30.0.1" />
+      <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+      <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
       <PackageReference Include="Google.Apis.Drive.v3" Version="1.62.0.3155" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="6.0.0" />
     </ItemGroup>
